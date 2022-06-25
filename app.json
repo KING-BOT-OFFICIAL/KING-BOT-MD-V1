@@ -60,7 +60,6 @@
             "required": true,
             "value": "_*Im Uploading your video*_ ✨➾🎲"
         }
-   },
     "buildpacks": [
     {
       "url": "heroku/nodejs"
