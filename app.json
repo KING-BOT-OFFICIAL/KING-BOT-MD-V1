@@ -1,10 +1,67 @@
 {
-  "name": "KING-BOT-MD V1",
-  "description": "whatsapp md bot build with NODE.js",
+  "name": "KING BOT - MD V1",
+  "description": "whatsapp md bot build with nodejs",
   "repository": "https://github.com/KING-BOT-OFFICIAL/KING-BOT-MD",
   "logo": "https://telegra.ph/file/24b9b8507613125d34bd1.jpg",
   "keywords": ["nodejs", "bot", "whatsapp bot", "whatsapp automation", "multi device"],
-  "buildpacks": [
+  "env": { 
+        "OWNER_NUMBER": {
+            "description": "නම්බර් එක දාන්න",
+            "required": true,
+            "value":"94729352830"
+        },
+        "MENU_CMD": {
+            "description": "මෙනු කමාන්ඩ් එක දාන්න"
+            "required": false,
+            "value": ""
+        },
+        "OWNER_NAME": {
+            "description": "නම දාන්න",
+            "required": true,
+            "value":"ШHłТΞ HΛϾКΞЯS"
+        },
+        "BOT_NAME": {
+            "description": "බොට් owner නම",
+            "required": true,
+            "value":"[🇱🇰𝚱𝚰𝚴Ｇ 𝛃𝚯𝚪🤘] ᎷᎠ"
+        },
+       "STICKER_PACKAGE": {
+            "description": "ස්ටිකර් පැකේජ් name එක",
+            "required": true,
+            "value":"[🇱🇰𝚱𝚰𝚴Ｇ 𝛃𝚯𝚪🤘]"
+        },
+        "HEROKU_APP_NAME": {
+            "description": "Exact name which you gave at the top",
+            "required": true,
+            "value":""
+        },
+        "SESSION_NAME": {
+            "description": "සෙසන් නේම් එක මේක් වෙනස් කරන්න ඔනි නෑ",
+            "required": true,
+            "value":"session"
+        },
+        "SONG_DOWNLOAD": {
+            "description": "Enter the audio download message... ශබ්ද බාගත වීමේ පණිවිඩය ඇතුලත් කරන්න",
+            "required": true,
+            "value": "_*I'm Searching your song*_ ✨➾🔎"
+        },
+        "SONG_UPLOAD": {
+            "description": "Enter the audio upload message... ශබ්ද උඩුගත වීමේ පණිවිඩය ඇතුලත් කරන්න",
+            "required": true,
+            "value": "_*Im Uploading your song*_ ✨➾🎲"
+        },
+        "VIDEO_DOWNLOAD": {
+            "description": "Enter the video download message... වීඩියෝ බාගත වීමේ පණිවිඩය ඇතුලත් කරන්න",
+            "required": true,
+            "value": "_*I'm Bringing your video*_ ✨➾🔎"
+        },
+        "VIDEO_UPLOAD": {
+            "description": "Enter the video upload message... වීඩියෝ උඩුගත වීමේ පණිවිඩය ඇතුලත් කරන්න",
+            "required": true,
+            "value": "_*Im Uploading your video*_ ✨➾🎲"
+        }
+   },
+    "buildpacks": [
     {
       "url": "heroku/nodejs"
     },
