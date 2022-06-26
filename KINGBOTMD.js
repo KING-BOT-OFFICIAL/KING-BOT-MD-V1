@@ -3479,7 +3479,7 @@ const template = generateWAMessageFromContent(m.chat, proto.Message.fromObject({
                             hydratedFooterText: '</> ᴘᴏᴡᴇʀᴇᴅ ʙʏ ᴋɪɴɢ ʙᴏᴛ </>️ ▷',
                             hydratedButtons: [{
                                 urlButton: {
-                                    displayText: '🔥 YOUTUBE 🔥,
+                                    displayText: '🔥 YOUTUBE 🔥',
                                     url: `${myweb}`
                                 }
                             }, {
