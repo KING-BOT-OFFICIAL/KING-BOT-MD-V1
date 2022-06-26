@@ -80,7 +80,7 @@ async function startGojoMdNx() {
         if (!GojoMdNx.public && !mek.key.fromMe && chatUpdate.type === 'notify') return
         if (mek.key.id.startsWith('BAE5') && mek.key.id.length === 16) return
         m = smsg(GojoMdNx, mek, store)
-        require("./KINGBOTMD")(GojoMdNx, m, chatUpdate, store)
+        require("./Kingbotmd")(GojoMdNx, m, chatUpdate, store)
         } catch (err) {
             console.log(err)
         }
