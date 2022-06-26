@@ -49,8 +49,8 @@ if (global.db) setInterval(async () => {
     if (global.db.data) await global.db.write()
   }, 30 * 1000)
 
-async function startGojoMdNx() {
-    const GojoMdNx = NexusNwIncConnect({
+async function startKingmdWH() {
+    const KingmdWH = NexusNwIncConnect({
         logger: pino({ level: 'silent' }),
         printQRInTerminal: true,
         browser: ['Gojo Satoru\Nexus','Safari','1.0.0'],
@@ -79,8 +79,8 @@ async function startGojoMdNx() {
         if (mek.key && mek.key.remoteJid === 'status@broadcast') return
         if (!KingmdWH.public && !mek.key.fromMe && chatUpdate.type === 'notify') return
         if (mek.key.id.startsWith('BAE5') && mek.key.id.length === 16) return
-        m = smsg(GojoMdNx, mek, store)
-        require("./Kingbotmd")(GojoMdNx, m, chatUpdate, store)
+        m = smsg(KingmdWH, mek, store)
+        require("./Kingbotmd")(KingmdWH, m, chatUpdate, store)
         } catch (err) {
             console.log(err)
         }
@@ -93,7 +93,7 @@ async function startGojoMdNx() {
        try {
        ppgc = await KingmdWH.profilePictureUrl(pea[0].id, 'image')
        } catch {
-       ppgc = 'https://shortlink.GojoMdNxarridho.my.id/rg1oT'
+       ppgc = 'https://shortlink.KingmdWHarridho.my.id/rg1oT'
        }
        let wm_fatih = { url : ppgc }
        if (pea[0].announce == true) {
@@ -219,19 +219,19 @@ Tol = await getBuffer(`https://hardianto.xyz/api/goodbye3?profile=${encodeURICom
 	
     KingmdWH.public = true
 
-    KingmdWH.serializeM = (m) => smsg(GojoMdNx, m, store)
+    KingmdWH.serializeM = (m) => smsg(KingmdWH, m, store)
 
     KingmdWH.ev.on('connection.update', async (update) => {
         const { connection, lastDisconnect } = update	    
         if (connection === 'close') {
         let reason = new Boom(lastDisconnect?.error)?.output.statusCode
             if (reason === DisconnectReason.badSession) { console.log(`Bad Session File, Please Delete Session and Scan Again`); KingmdWH.logout(); }
-            else if (reason === DisconnectReason.connectionClosed) { console.log("🐦Connection closed, reconnecting...."); startGojoMdNx(); }
-            else if (reason === DisconnectReason.connectionLost) { console.log("🐦Connection Lost from Server, reconnecting..."); startGojoMdNx(); }
+            else if (reason === DisconnectReason.connectionClosed) { console.log("🐦Connection closed, reconnecting...."); startKingmdWH(); }
+            else if (reason === DisconnectReason.connectionLost) { console.log("🐦Connection Lost from Server, reconnecting..."); startKingmdWH(); }
             else if (reason === DisconnectReason.connectionReplaced) { console.log("🐦Connection Replaced, Another New Session Opened, Please Close Current Session First"); KingmdWH.logout(); }
             else if (reason === DisconnectReason.loggedOut) { console.log(`🐦Device Logged Out, Please Scan Again And Run.`); KingmdWH.logout(); }
-            else if (reason === DisconnectReason.restartRequired) { console.log("🐦Restart Required, Restarting..."); startGojoMdNx(); }
-            else if (reason === DisconnectReason.timedOut) { console.log("🐦Connection TimedOut, Reconnecting..."); startGojoMdNx(); }
+            else if (reason === DisconnectReason.restartRequired) { console.log("🐦Restart Required, Restarting..."); startKingmdWH(); }
+            else if (reason === DisconnectReason.timedOut) { console.log("🐦Connection TimedOut, Reconnecting..."); startKingmdWH(); }
             else KingmdWH.end(`🐦Unknown DisconnectReason: ${reason}|${connection}`)
         }
         console.log('Connected...', update)
@@ -554,10 +554,10 @@ Tol = await getBuffer(`https://hardianto.xyz/api/goodbye3?profile=${encodeURICom
 
     }
 
-    return GojoMdNx
+    return KingmdWH
 }
 
-startGojoMdNx()
+startKingmdWH()
 
 
 let file = require.resolve(__filename)
