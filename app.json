@@ -9,6 +9,7 @@
             "description": "දැම්මෙ නෑ කියලා අවුලක් නෑ...",
             "required": true,
             "value":""
+        },
         "OWNER_NUMBER": {
             "description": "ඔයාගෙ නම්බර් එක දාන්න..",
             "required": true,
