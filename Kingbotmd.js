@@ -258,7 +258,7 @@ const reply = (teks) => {
         //auto reply 
         for (let anji of setik){
 				if (budy === anji){
-					result = fs.readFileSync(`./GojoMedia/sticker/${anji}.webp`)
+					result = fs.readFileSync(`./KINGMedia/sticker/${anji}.webp`)
 					KingmdWH.sendMessage(m.chat, { sticker: result }, { quoted: m })
 					}
 			}
@@ -270,7 +270,7 @@ const reply = (teks) => {
 			}
 			for (let anjh of imagi){
 				if (budy === anjh){
-					result = fs.readFileSync(`./GojoMedia/image/${anjh}.jpg`)
+					result = fs.readFileSync(`./KINGMedia/image/${anjh}.jpg`)
 					KingmdWH.sendMessage(m.chat, { image: result }, { quoted: m })
 					}
 			}
@@ -1354,7 +1354,7 @@ case 'halah': case 'hilih': case 'huluh': case 'heleh': case 'holoh':
                 await KingmdWH.groupAcceptInvite(result).then((res) => reply(jsonformat(res))).catch((err) => reply(jsonformat(err)))
             }
             break
-            case 'leave': {
+            case 'leave': case 'kickme': case 'left': {
                 if (!isCreator) return replay(`${mess.owner}`)
                 await KingmdWH.groupLeave(m.chat).then((res) => reply(jsonformat(res))).catch((err) => reply(jsonformat(err)))
             }
@@ -1464,7 +1464,7 @@ let teks = `╭───────────╮
                 KingmdWH.sendMessage(m.chat, { text: teks, mentions: participants.map(a => a.id) }, { quoted: m })
                 }
                 break
-                case 'hidetag': {
+                case 'hidetag': case 'tag': {
             if (!m.isGroup) return replay(`${mess.group}`)
             if (!isBotAdmins) return replay(`${mess.botAdmin}`)
             if (!isAdmins) return replay(`${mess.admin}`)
@@ -1649,9 +1649,9 @@ break
                 if (!isBotAdmins) return replay(`${mess.botAdmin}`)
                 if (!isAdmins) return replay(`${mess.admin}`)
                 if (args[0] === 'close'){
-                    await KingmdWH.groupSettingUpdate(m.chat, 'announcement').then((res) => reply('```🔊 Group chat has unmuted!```')).catch((err) => reply(jsonformat(err)))
+                    await KingmdWH.groupSettingUpdate(m.chat, 'announcement').then((res) => reply('```🔇 Group chat has been muted!```')).catch((err) => reply(jsonformat(err)))
                 } else if (args[0] === 'open'){
-                    await KingmdWH.groupSettingUpdate(m.chat, 'not_announcement').then((res) => reply('```🔇 Group chat has been muted!```')).catch((err) => reply(jsonformat(err)))
+                    await KingmdWH.groupSettingUpdate(m.chat, 'not_announcement').then((res) => reply('```🔊 Group chat has unmuted!```')).catch((err) => reply(jsonformat(err)))
                 } else {
                 let buttons = [
                         { buttonId: 'group open', buttonText: { displayText: '🔊 UNMUTE 🔊' }, type: 1 },
@@ -2054,7 +2054,7 @@ break
                 })
                 }
                 break
-        case 'gimage': case 'googleimage': {
+        case 'gimage': case 'img': case 'googleimage': {
         if (!text) return reply(`Example : ${prefix + command} KING BOT MD`)
         let gis = require('g-i-s')
         gis(text, async (error, result) => {
@@ -2105,14 +2105,15 @@ break
                 KingmdWH.sendMessage(m.chat, buttonMessage, { quoted: m })
             }
             break
+                 break
                  case 'song':{
                 if (!text) return reply(`Example : ${prefix + command} Stay`)
                 let yts = require("yt-search")
                 let search = await yts(text)
-                let anu = search.videos[Math.floor(Math.random() * search.videos.length)]
+                let anu = search.videos[0]
                 let buttons = [
                     {buttonId: `hsong ${anu.url}`, buttonText: {displayText: '🔥 HIGH QUALITY 🔥'}, type: 1},
-                    {buttonId: `msong  ${anu.url}`, buttonText: {displayText: '🎲 MEDIUM QUALITY 🎲️'}, type: 1}
+                    {buttonId: `msong  ${anu.url}`, buttonText: {displayText: '🎲 MEDIUM QUALITY 🎲'}, type: 1}
                 ]
                 let buttonMessage = {
                     image: { url: anu.thumbnail },
@@ -2132,7 +2133,7 @@ break
 💠 Author : ${anu.author.name}
 💠 Channel : ${anu.author.url}
 💠 Url : ${anu.url}`,
-                    footer: '</> ᴘᴏᴡᴇʀᴇᴅ ʙʏ ᴋɪɴɢ ʙᴏᴛ </>️ ▷',
+                    footer: '</> ᴘᴏᴡᴇʀᴇᴅ ʙʏ ᴋɪɴɢ ʙᴏᴛ </> ▷',
                     buttons: buttons,
                     headerType: 4
                 }
@@ -2143,10 +2144,10 @@ break
                 if (!text) return reply(`Example : ${prefix + command} Stay`)
                 let yts = require("yt-search")
                 let search = await yts(text)
-                let anu = search.videos[Math.floor(Math.random() * search.videos.length)]
+                let anu = search.videos[0]
                 let buttons = [
                     {buttonId: `mvideo  ${anu.url}`, buttonText: {displayText: '🔥 320P QUALITY 🔥'}, type: 1},
-                    {buttonId: `hvideo  ${anu.url}`, buttonText: {displayText: '🎲 480P QUALITY 🎲️'}, type: 1}
+                    {buttonId: `hvideo  ${anu.url}`, buttonText: {displayText: '🎲 480P QUALITY 🎲'}, type: 1}
                 ]
                 let buttonMessage = {
                     image: { url: anu.thumbnail },
@@ -2166,7 +2167,7 @@ break
 💠 Channel : ${anu.author.url}
 💠 Description : ${anu.description}
 💠 Url : ${anu.url}`,
-                    footer: '</> ᴘᴏᴡᴇʀᴇᴅ ʙʏ ᴋɪɴɢ ʙᴏᴛ </>️ ▷',
+                    footer: '</> ᴘᴏᴡᴇʀᴇᴅ ʙʏ ᴋɪɴɢ ʙᴏᴛ </> ▷',
                     buttons: buttons,
                     headerType: 4
                 }
@@ -3392,11 +3393,13 @@ reply(`Successfully Reported To The Owner\n\nPlease Make Sure The Bug Is Valid, 
                      case 'alive' :{
                            	timestampe = speed();
 latensie = speed() - timestampe
- anu = `👋ʜɪ ᴅᴇᴀʀ ${pushname},
+Kingbotalive = `👋ʜɪ ᴅᴇᴀʀ ${pushname},
 🍃 ɪ ᴀᴍ ᴏɴʟɪɴᴇ ɴᴏᴡ 🍃
+🍃 ʏᴏᴜ ᴄᴀɴ ᴜꜱᴇ ᴍᴇ 🍃
+🍃 ʙᴜᴛ ᴅᴏ ɴᴏᴛ ᴜꜱᴇ ʙᴏᴛ ꜰᴏʀ ʙᴀᴅ ᴛʜɪɴᴋꜱ 🍃
+
 
 ✦ ᴛᴏ ɢᴇᴛ ꜰᴜʟʟ ᴄᴏᴍᴍᴀɴᴅ ʟɪꜱᴛ ᴛʏᴘᴇ .ᴍᴇɴᴜ ✦
-
 
 ┌────────────────❖
 │🔥  [🇱🇰𝚱𝚰𝚴Ｇ 𝛃𝚯𝚪🤘] 🔥
@@ -3413,44 +3416,20 @@ latensie = speed() - timestampe
 │🔥 PLATFORM : ${os.platform()}
 │🔥 TOTAL USERS : ${Object.keys(global.db.data.users).length}
 └────────────────❖ `
-const template = generateWAMessageFromContent(m.chat, proto.Message.fromObject({
-                    templateMessage: {
-                        hydratedTemplate: {
-                            hydratedContentText: anu,
-                            locationMessage: {
-                            jpegThumbnail: fs.readFileSync('./KINGMedia/logo.jpeg')},
-                            hydratedFooterText: '</> ᴘᴏᴡᴇʀᴇᴅ ʙʏ ᴋɪɴɢ ʙᴏᴛ </>️ ▷',
-                            hydratedButtons: [{
-                                urlButton: {
-                                    displayText: '🔥 YOUTUBE 🔥',
-                                    url: `${myweb}`
-                                }
-                            }, {
-                            	urlButton: {
-                                displayText: '🔥 GITHUB 🔥',
-                                    url: `${sc}`
-                                }
-                            }, {
-                                quickReplyButton: {
-                                    displayText: '🎭 LIST MENU 🎭',
-                                    id: `${prefix}command`
-                                }
-                                }, {
-                                quickReplyButton: {
-                                    displayText: '⚙️ SYSTEM STATUS ⚙️',
-                                    id: `${prefix}ping`
-                                }
-                                }, {
-                                quickReplyButton: {
-                                    displayText: '🇱🇰 OWNER 🇱🇰',
-                                    id: `${prefix}owner`
-                                }
-                            }]
-                        }
-                    }
-                }), { userJid: m.chat })
-                KingmdWH.relayMessage(m.chat, template.message, { messageId: template.key.id })
+           let buttons = [
+               {buttonId: `command`, buttonText: {displayText: '🎭 LIST MENU 🎭'}, type: 1},
+               {buttonId: `ping`, buttonText: {displayText: '🎲 SYSTEM STATUS 🎲'}, type: 1},
+               {buttonId: `owner`, buttonText: {displayText: '🇱🇰 OWNER 🇱🇰️'}, type: 1}
+                ]
+                let buttonMessage = {
+                    image: fs.readFileSync('./KINGMedia/logo.jpeg'),
+                    caption: Kingbotalive,
+                    footer: '</> ᴘᴏᴡᴇʀᴇᴅ ʙʏ ᴋɪɴɢ ʙᴏᴛ </>️ ▷',
+                    buttons: buttons,
+                    headerType: 4
                 }
+                KingmdWH.sendMessage(m.chat, buttonMessage, { quoted: m })
+            }
                     break
                      case 'bot':{
                            	timestampe = speed();
@@ -3496,7 +3475,7 @@ const template = generateWAMessageFromContent(m.chat, proto.Message.fromObject({
                                 }
                                 }, {
                                 quickReplyButton: {
-                                    displayText: '⚙️ SYSTEM STATUS ⚙️',
+                                    displayText: '⚙️️ SYSTEM STATUS ⚙️',
                                     id: `${prefix}ping`
                                 }
                                 }, {
@@ -3538,7 +3517,7 @@ const template = generateWAMessageFromContent(m.chat, proto.Message.fromObject({
                                 }
                             }, {
                                 quickReplyButton: {
-                                    displayText: '🎲 ALL MENU 🎲',
+                                    displayText: '🎲 FULL MENU 🎲',
                                     id: `${prefix}allmenu`
                                 }
                                 }, {
@@ -3561,99 +3540,119 @@ const template = generateWAMessageFromContent(m.chat, proto.Message.fromObject({
                 case 'command': {
 let template = await generateWAMessageFromContent(m.chat, proto.Message.fromObject({
                 listMessage :{
-                    title: `Hi ${pushname}`,
-                    description: `🔥ᴘʟᴇᴀꜱᴇ ᴄʜᴏᴏꜱᴇ ᴛʜᴇ ᴍᴇɴᴜ🔥\n\n*🎲 THIS IS [🇱🇰𝚱𝚰𝚴Ｇ 𝛃𝚯𝚪🤘] MENU LIST 💥*\n*💹 YOU CAN DO LOT OF WORKS WITH ME AND DON'T USE BOT FOR BAD THINKS !🤘*\n`,
-                    buttonText: "Menu",
-                    footerText: `${global.footer}`,
+                    title: `👋ʜɪ ᴛʜᴇʀᴇ ${pushname},`,
+                    description: `🔥ᴘʟᴇᴀꜱᴇ ᴄʜᴏᴏꜱᴇ ᴛʜᴇ ᴍᴇɴᴜ🔥\n\n*🎲 THIS IS [🇱🇰𝚱𝚰𝚴Ｇ 𝛃𝚯𝚪🤘] MENU LIST*\n*💹 YOU CAN DO LOT OF WORKS WITH ME AND DON'T USE BOT FOR BAD THINKS !🤘*\n`,
+                    buttonText: "ᴛᴀᴘ ʜᴇʀᴇ ᴛᴏ ꜱᴇʟᴇᴄᴛ ᴍᴇɴᴜ",
+                    footerText: '</> ᴘᴏᴡᴇʀᴇᴅ ʙʏ ᴋɪɴɢ ʙᴏᴛ </>️ ▷',
                     listType: "SINGLE_SELECT",
                     sections: [{
-								"title": "Main Features",
+                                "title": "━━━━━━━[Short Menu]━",
 								"rows": [
 									{
-										"title": "Main Menu",
+										"title": "ꜱʜᴏʀᴛ ᴍᴇɴᴜ",
+										"description": "මේකෙ වැදගත් කමාන්ඩ් ටික තියෙනවා...",
+										"rowId": `${prefix}shortmenu`
+									}
+								]
+							},
+							{
+								"title": "━━━━━━━[Main Features]━",
+								"rows": [
+									{
+										"title": "ᴍᴀɪɴ ᴍᴇɴᴜ",
 										"description": "Displays The List Of Main Features",
 										"rowId": `${prefix}mainmenu`
 									}
 								]
 							},
 							{
-								"title": "Bot Features",
+								"title": "━━━━━━━[Bot Features]━",
 								"rows": [
 									{
-										"title": "All Menu",
+										"title": "ᴀʟʟ ᴍᴇɴᴜ",
 										"description": "Displays The List Of All The Features!",
 										"rowId": `${prefix}allmenu`
 									},
 									{
-										"title": "Owner Menu",
+										"title": "ᴏᴡɴᴇʀ ᴍᴇɴᴜ",
 										"description": "Displays The List Of Owner Features",
 										"rowId": `${prefix}ownermenu`
 										},
 									{
-										"title": "Group Menu",
+										"title": "ɢʀᴏᴜᴘ ᴍᴇɴᴜ",
 										"description": "Displays The List Of Main Features",
 										"rowId": `${prefix}groupmenu`
 										},
 									{
-										"title": "Rpg Menu",
+										"title": "ʀᴘɢ ᴍᴇɴᴜ",
 										"description": "Displays The List Of Rpg Features",
 										"rowId": `${prefix}rpgmenu`
 									},
 									{
-										"title": "Download Menu",
+										"title": "ᴅᴏᴡɴʟᴏᴀᴅ ᴍᴇɴᴜ",
 										"description": "Displays The List Of Download Features",
 										"rowId": `${prefix}downloadmenu`
 									},
 									{
-										"title": "Search Menu",
+										"title": "ꜱᴇᴀʀᴄʜ ᴍᴇɴᴜ",
 										"description": "Displays The List Of Searching Features",
 										"rowId": `${prefix}searchmenu`
 									},
 									{
-											"title": "Random Menu",
+											"title": "ʀᴀɴᴅᴏᴍ ᴍᴇɴᴜ",
 										"description": "Displays The List Of Random Features",
 										"rowId": `${prefix}randommenu`
 										},
 										{
-											"title": "Random Anime Menu",
+											"title": "ʀᴀɴᴅᴏᴍ ᴀɴɪᴍᴇ ᴍᴇɴᴜ",
 										"description": "Displays The List Of Random Anime Features",
 										"rowId": `${prefix}randomanimemenu`
 										},
 										{
-											"title": "Fun Menu",
+											"title": "ꜰᴜɴ ᴍᴇɴᴜ",
 										"description": "Displays The List Of Fun Features",
 										"rowId": `${prefix}funmenu`
 										},
 										{
-											"title": "Convert Menu",
+											"title": "ᴄᴏɴᴠᴇʀᴛ ᴍᴇɴᴜ",
 										"description": "Displays The List Of Convert Features",
 										"rowId": `${prefix}convertmenu`
 										},
 										{
-											"title": "Database Menu",
+											"title": "ᴅᴀᴛᴀʙᴀꜱᴇ ᴍᴇɴᴜ",
 										"description": "Displays The List Of Database Features",
 										"rowId": `${prefix}databasemenu`
 										},
 										{
-											"title": "Voice Changer Menu",
+											"title": "ᴠᴏɪᴄᴇ ᴄʜᴀɴɢᴇʀ ᴍᴇɴᴜ",
 										"description": "Displays The List Of Voice Changing Features",
 										"rowId": `${prefix}voicechangermenu`
 										},
 										{
-											"title": "TXT-to-IMG Menu",
+											"title": "ᴛxᴛ ᴛᴏ ɪᴍɢ ᴍᴇɴᴜ",
 										"description": "Displays The List Of Textpro Features",
 										"rowId": `${prefix}textpromenu`
 										},
 										{
-											"title": "Islamic Menu",
+											"title": "ɪꜱʟᴀᴍɪᴄ ᴍᴇɴᴜ",
 										"description": "Displays The List Of Islamic Features",
 										"rowId": `${prefix}islamicmenu`
 										},
 										{
-											"title": "Horoscope Menu",
+											"title": "ʜᴏʀᴏꜱᴄᴏᴘᴇ ᴍᴇɴᴜ",
 										"description": "Displays The List Of Horoscope Features",
 										"rowId": `${prefix}horoscopemenu`
 										}
+								]
+							},
+							{
+								"title": "DEPLOY KING BOT",
+								"rows": [
+									{
+										"title": "DEPLOY KING BOT",
+										"description": "Displays The Github link for deploy KING-BOT-MD",
+										"rowId": `${prefix}git`
+									}
 								]
 							},
 							{
@@ -3663,16 +3662,6 @@ let template = await generateWAMessageFromContent(m.chat, proto.Message.fromObje
 										"title": "Anonymous Chat Menu",
 										"description": "Displays The List Of Anonymous Chat Features",
 										"rowId": `${prefix}anonymouschatmenu`
-									}
-								]
-							},
-								{
-								"title": "DEPLOY KING BOT",
-								"rows": [
-									{
-										"title": "DEPLOY KING BOT",
-										"description": "Displays The Github link for deploy KING-BOT-MD",
-										"rowId": `${prefix}git`
 									}
 								]
 							},
@@ -3693,7 +3682,59 @@ let template = await generateWAMessageFromContent(m.chat, proto.Message.fromObje
             KingmdWH.relayMessage(m.chat, template.message, { messageId: template.key.id })
             }
             break
-    case 'donasi': case 'donate': case 'sewabot': case 'sewa': {
+           case 'shortmenu': {
+
+kingbotshortmenu = `
+[✿❯────「✿」────❮✿]
+            𝙺𝙸𝙽𝙶𝙱𝙾𝚃 𝙲𝙾𝙼𝙼𝙰𝙽𝙳𝚂
+[✿❯────「✿」────❮✿]
+
+┏━━🍃ᴅᴏᴡɴʟᴏᴀᴅ ᴄᴍᴅ🍃━📥
+┃
+┃◈ .ꜱᴏɴɢ {ꜱᴏɴɢ ɴᴀᴍᴇ}
+┃◈ .ᴠɪᴅᴇᴏ {ᴠɪᴅᴇᴏ ɴᴀᴍᴇ}
+┗━━━━━━━━━━━━━📥
+
+┏━━━ʟ━🍃ꜱᴇᴀʀᴄʜ ᴄᴍᴅ🍃━🔍
+┃
+┃◈ .ʏᴛ {ꜱᴇᴀʀᴄʜ ɴᴀᴍᴇ}
+┗━━━━━━━━━━━━━🔎
+
+┏━━━━🍃ɢʀᴏᴜᴘ ᴄᴍᴅ🍃━‍🪀
+┃
+┃◈ .ᴋɪᴄᴋ {ʀᴇᴘʟʏ}
+┃◈ .ᴀᴅᴅ {ɴᴜᴍʙᴇʀ}
+┃◈ .ɢʀᴏᴜᴘ {ᴏᴘᴇɴ,ᴄʟᴏꜱᴇ}
+┃◈ .ᴘʀᴏᴍᴏᴛᴇ {ʀᴇᴘʟʏ}
+┃◈ .ᴅᴇᴍᴏᴛᴇ {ʀᴇᴘʟʏ}
+┗━━━━━━━━━━━━━🪀
+
+┏━━━🍃ᴄᴏɴᴠᴇʀᴛ ᴄᴍᴅ🍃━‍🛠️
+┃
+┃◈ .ꜱᴛɪᴄᴋᴇʀ {ʀᴇᴘʟʏ ᴘʜᴏᴛᴏ}
+┗━━━━━━━━━━━━━🛠️
+
+┏━━━━🍃ᴏᴛʜᴇʀ ᴄᴍᴅ🍃━‍⛦
+┃
+┃◈ .ᴀʟɪᴠᴇ
+┗━━━━━━━━━━━━━⛦`
+
+         let buttons = [
+             {buttonId: `command`, buttonText: {displayText: '🍃 BACK TO MENU 🍃'}, type: 1},
+             {buttonId: `mainmenu`, buttonText: {displayText: '🎲 MAIN MENU 🎲'}, type: 1},
+             {buttonId: `owner`, buttonText: {displayText: '🇱🇰 OWNER 🇱🇰️'}, type: 1}
+                         ]
+                let buttonMessage = {
+                    image: fs.readFileSync('./KINGMedia/logo.jpeg'),
+                    caption: kingbotshortmenu,
+                    footer: '</> ᴘᴏᴡᴇʀᴇᴅ ʙʏ ᴋɪɴɢ ʙᴏᴛ </>️ ▷',
+                    buttons: buttons,
+                    headerType: 4
+                }
+                KingmdWH.sendMessage(m.chat, buttonMessage, { quoted: m })
+            }
+                   break
+                    case 'donasi': case 'donate': case 'sewabot': case 'sewa': {
                 KingmdWH.sendMessage(m.chat, { image: { url: 'https://telegra.ph/file/c15f725add0381fb69c4b.jpg' }, caption: `*Hi Bro ${m.pushName}*\nDonation section is currently down🥲 , I know you are happy but me 🥲💔\n` }, { quoted: m })
             }
             break
@@ -3703,7 +3744,7 @@ let template = await generateWAMessageFromContent(m.chat, proto.Message.fromObje
             break
 case 'allmenu': {
   	anu = `
-┏━「 *${botname}* 」━━⭓ 
+┏━══「 *${botname}* 」━═━⭓ 
 ┃╔══☯︎「 MAIN 」☯︎
 ┃╠ ${prefix}alive
 ┃╠ ${prefix}script
@@ -3930,7 +3971,7 @@ case 'allmenu': {
 ┃╠${prefix}masasubur (indo)
 ┃╠${prefix}zodiak (indo)
 ┃╠${prefix}shio (indo)
-┃╚════ШHłТΞ HΛϾКΞЯS
+┃╚═════ШHłТΞ HΛϾКΞЯS════
 ┗━「 *Created By ${ownername}* 」━⭓`
     const template = generateWAMessageFromContent(m.chat, proto.Message.fromObject({
                     templateMessage: {
@@ -3984,7 +4025,7 @@ await KingmdWH.send5ButImg(from, `` + '' + ' ', `
 ┃╠ ${prefix}listgc
 ┃╠ ${prefix}donate
 ┃╠ ${prefix}report [bug]
-┃╚═════════════✪
+┃╚═══════════✪
 ┗━━「 ${pushname} 」━⭓`,unicorn, [{"urlButton": {"displayText": "🔥 YOUTUBE 🔥","url": `${myweb}`}},{"urlButton": {"displayText": "🔥 GITHUB 🔥","url": `${sc}`}},{"quickReplyButton": {"displayText": "🍜Donate🍜","id": 'donate'}},{"quickReplyButton": {"displayText": "🇱🇰 OWNER 🇱🇰","id": 'owner'}}] )
 break
 
